@@ -5,6 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Reltec Resistências Elétricas</title>
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="contato.css">
+    <script>
+      function validarEmail(email) {
+          let conferencia = /\S+@\S+\.\S+/;
+          return conferencia.test(email);
+      }
+
+      function validarForm(event) {
+          let emailInput = document.getElementById('email');
+          let email = emailInput.value;
+
+          if (!validarEmail(email)) {
+              event.preventDefault();
+              alert('E-mail inválido, insira novamente por favor.');
+          } else {
+            alert ('Contato enviado com sucesso!')
+          }
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+          let form = document.getElementById('contactForm');
+          form.addEventListener('submit', validarForm);
+      });
+  </script>
   </head>
   <body>
     <div id="container">
@@ -19,6 +43,22 @@
             <li><a href="./contato.html">Contato</a></li>
           </ul>
         </nav>
+      </header>
+
+      <main>
+        <div class="container">
+          <div class="form">
+            <h2>Entre em contato</h2>
+            <form action="" id="contactForm">
+              <input type="text" name="nome" placeholder="Digite seu nome" required>
+              <input type="text" name="email" id="email" placeholder="Digite seu E-mail" required>
+              <textarea name="mensagem" placeholder="Digite sua mensagem"></textarea>
+
+              <button type="submit">Enviar Contato</button>
+            </form>
+          </div>
+        </div>
+      </main>
 
         <div>
           <footer id="rodape">
@@ -29,11 +69,10 @@
               <a href="./contato.html">Contato</a>
             </p>
             <p>
-              2024 <a href="">Reltec Resistências Elétricas</a> - Todos os direitos reservados
+              2024 - Reltec Resistências Elétricas - Todos os direitos reservados
               &copy;
             </p>
           </footer>
         </div>
-      </header>
   </body>
 </html>
