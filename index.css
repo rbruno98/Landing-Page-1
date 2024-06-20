@@ -68,3 +68,81 @@ nav ul li a:hover {
 #rodape > p a:hover {
   color: #d81c0e;
 }
+
+.tituloSobre {
+  text-align: center;
+  text-decoration: underline;
+}
+
+.textoSobre {
+  text-align: center;
+}
+
+/* Carrossel */
+.carrossel {
+  position: relative;
+  width: 20%;
+  max-width: 600px;
+  margin-left: 10rem;
+  margin-top: 1rem;
+  overflow: hidden;
+  border-radius: 5px;
+  border: 2px solid #ccc;
+  background-color: #fff;
+  float: left;
+}
+
+.tituloProdutos {
+  margin-left: 14rem;
+  margin-top: 5rem;
+  text-decoration: underline;
+  font-size: 1em;
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
+
+.carrosselImagens {
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+  transition: transform 0.5s ease;
+}
+
+.carrosselImagens img {
+  width: 100%;
+  display: inline-block;
+}
+
+#botão {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  color: #111;
+  border: none;
+  padding: -20px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+button.anterior {
+  left: 0;
+}
+
+button.proximo {
+  right: 0;
+}
+
+article#mapa {
+  width: 30%;
+  height: 30%;
+  margin-left: 30rem;
+}
+
+.tituloMapa {
+  margin-left: 35.5rem;
+  text-decoration: underline;
+  font-size: 1em;
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
