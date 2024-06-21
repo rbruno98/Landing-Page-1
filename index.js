@@ -29,3 +29,9 @@ function fotoAnt() {
 document.addEventListener("DOMContentLoaded", () => {
   carrosselFotos(atualIndice);
 });
+
+document
+  .querySelector(".entreEmContato")
+  .addEventListener("click", function () {
+    window.location.href = "contato.html";
+  });

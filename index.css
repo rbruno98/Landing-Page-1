@@ -1,6 +1,6 @@
 body {
   background-color: #f0f0f0;
-  font-family: sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   height: 100vh;
   margin: 0;
 }
@@ -70,6 +70,7 @@ nav ul li a:hover {
 }
 
 .tituloSobre {
+  color: #d81c0e;
   text-align: center;
   text-decoration: underline;
 }
@@ -78,7 +79,6 @@ nav ul li a:hover {
   text-align: justify;
 }
 
-/* Carrossel */
 .carrossel {
   position: relative;
   width: 500px;
@@ -93,6 +93,7 @@ nav ul li a:hover {
 }
 
 .tituloProdutos {
+  color: #d81c0e;
   text-align: center;
   margin-bottom: 0;
 }
@@ -134,7 +135,12 @@ button.proximo {
 }
 
 .projetosEspeciais {
+  color: #d81c0e;
   text-align: center;
+}
+
+#paragrafoEspeciais {
+  color: #111;
 }
 
 .entreEmContato {
@@ -153,10 +159,7 @@ button.proximo {
 }
 
 .tituloMapa {
-  margin-left: 100px;
-  margin-top: 100px;
-  text-decoration: underline;
-  font-size: 1em;
-  text-transform: uppercase;
+  color: #d81c0e;
+  text-align: center;
   margin-bottom: 0;
 }
