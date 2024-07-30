@@ -13,22 +13,104 @@
       }
 
       function validarForm(event) {
+          event.preventDefault();
           let emailInput = document.getElementById('email');
           let email = emailInput.value;
 
           if (!validarEmail(email)) {
-              event.preventDefault();
               alert('E-mail inválido, insira novamente por favor.');
-          } else {
-            alert ('Contato enviado com sucesso!')
+              return;
           }
+
+          let nomeInput = document.getElementById('nome');
+          let mensagemInput = document.getElementById('mensagem');
+          let idInput = document.getElementById('contactId');
+          let id = idInput.value;
+
+          let contato = {
+              id: id ? id : new Date().getTime().toString(),
+              nome: nomeInput.value,
+              email: email,
+              mensagem: mensagemInput.value
+          };
+
+          if (id) {
+              atualizarContato(contato);
+          } else {
+              criarContato(contato);
+          }
+
+          limparFormulario();
+          renderizarContatos();
+          alert('Contato enviado com sucesso!');
+      }
+
+      function criarContato(contato) {
+          let contatos = JSON.parse(localStorage.getItem('contatos')) || [];
+          contatos.push(contato);
+          localStorage.setItem('contatos', JSON.stringify(contatos));
+      }
+
+      function lerContatos() {
+          return JSON.parse(localStorage.getItem('contatos')) || [];
+      }
+
+      function atualizarContato(contatoAtualizado) {
+          let contatos = JSON.parse(localStorage.getItem('contatos')) || [];
+          contatos = contatos.map(contato => 
+              contato.id === contatoAtualizado.id ? contatoAtualizado : contato
+          );
+          localStorage.setItem('contatos', JSON.stringify(contatos));
+      }
+
+      function deletarContato(id) {
+          let contatos = JSON.parse(localStorage.getItem('contatos')) || [];
+          contatos = contatos.filter(contato => contato.id !== id);
+          localStorage.setItem('contatos', JSON.stringify(contatos));
+          renderizarContatos();
+      }
+
+      function editarContato(id) {
+          let contatos = lerContatos();
+          let contato = contatos.find(contato => contato.id === id);
+
+          if (contato) {
+              document.getElementById('nome').value = contato.nome;
+              document.getElementById('email').value = contato.email;
+              document.getElementById('mensagem').value = contato.mensagem;
+              document.getElementById('contactId').value = contato.id;
+              document.getElementById('cancelarEdicao').style.display = 'inline';
+          }
+      }
+
+      function limparFormulario() {
+          document.getElementById('contactForm').reset();
+          document.getElementById('contactId').value = '';
+          document.getElementById('cancelarEdicao').style.display = 'none';
+      }
+
+      function renderizarContatos() {
+          let contatos = lerContatos();
+          let lista = document.getElementById('contatosLista');
+          lista.innerHTML = '';
+
+          contatos.forEach(contato => {
+              let item = document.createElement('li');
+              item.innerHTML = `
+                  <strong>${contato.nome}</strong> (${contato.email}): ${contato.mensagem}
+                  <button onclick="editarContato('${contato.id}')">Editar</button>
+                  <button onclick="deletarContato('${contato.id}')">Deletar</button>
+              `;
+              lista.appendChild(item);
+          });
       }
 
       document.addEventListener('DOMContentLoaded', function () {
           let form = document.getElementById('contactForm');
           form.addEventListener('submit', validarForm);
+          renderizarContatos();
       });
-  </script>
+    </script>
   </head>
   <body>
     <div id="container">
@@ -50,29 +132,34 @@
           <div class="form">
             <h2>Entre em contato</h2>
             <form action="" id="contactForm">
-              <input type="text" name="nome" placeholder="Digite seu nome" required>
+              <input type="text" name="nome" id="nome" placeholder="Digite seu nome" required>
               <input type="text" name="email" id="email" placeholder="Digite seu E-mail" required>
-              <textarea name="mensagem" placeholder="Digite sua mensagem"></textarea>
-
+              <textarea name="mensagem" id="mensagem" placeholder="Digite sua mensagem"></textarea>
+              <input type="hidden" id="contactId">
               <button type="submit">Enviar Contato</button>
+              <button type="button" id="cancelarEdicao" style="display:none;" onclick="limparFormulario()">Cancelar Edição</button>
             </form>
+          </div>
+          <div>
+            <h2>Mensagens Recebidas</h2>
+            <ul id="contatosLista"></ul>
           </div>
         </div>
       </main>
 
-        <div>
-          <footer id="rodape">
-            <hr>
-            <p>
-              <a href="./index.html">Página Inicial</a>
-              <a href="./produtos.html">Produtos</a>
-              <a href="./contato.html">Contato</a>
-            </p>
-            <p>
-              2024 - Reltec Resistências Elétricas - Todos os direitos reservados
-              &copy;
-            </p>
-          </footer>
-        </div>
+      <div>
+        <footer id="rodape">
+          <hr>
+          <p>
+            <a href="./index.html">Página Inicial</a>
+            <a href="./produtos.html">Produtos</a>
+            <a href="./contato.html">Contato</a>
+          </p>
+          <p>
+            2024 - Reltec Resistências Elétricas - Todos os direitos reservados
+            &copy;
+          </p>
+        </footer>
+      </div>
   </body>
 </html>
